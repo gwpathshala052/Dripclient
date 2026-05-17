@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #0b0114;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.glow-text {
+    font-size: 2.3rem;
+    color: #df80ff;
+    text-shadow: 0 0 15px #bc34fa, 0 0 30px #bc34fa;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.sub-text {
+    font-size: 0.85rem;
+    color: #a6a6a6;
+    line-height: 1.4;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.tg-btn {
+    display: inline-block;
+    background-color: #170229;
+    color: #df80ff;
+    padding: 10px 25px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 1px solid #4a0d75;
+    box-shadow: 0 0 10px #4a0d75;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+}
+
+.card {
+    background: #06000d;
+    border: 1px solid #230438;
+    border-radius: 25px;
+    padding: 35px 25px;
+    box-shadow: 0 0 30px #2a0347;
+}
+
+.card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.duration {
+    color: #888;
+    font-size: 1rem;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+#daysValue {
+    color: #0084ff;
+}
+
+.slider-container {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: #ffffff;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #0084ff;
+    cursor: pointer;
+    box-shadow: 0 0 10px #0084ff;
+}
+
+#genBtn {
+    width: 100%;
+    background: linear-gradient(90deg, #9d34fa, #df80ff);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 20px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 15px #9d34fa;
+    letter-spacing: 1px;
+}
