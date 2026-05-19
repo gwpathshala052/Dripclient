@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drip Client Key Generator</title>
+    <title>DRIP CLIENT - GW PATHSHALA</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,152 +13,191 @@
         }
 
         body {
-            /* पर्पल और डार्क बैकग्राउंड थीम */
-            background-color: #0b071e;
+            background-color: #060311;
             color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* 010101 कोडिंग/मैट्रिक्स बैकग्राउंड पैटर्न - पर्पल और पिंक ओपेसिटी के साथ */
-        body::before {
-            content: "01010110 01001101 01010101 01100011 01010110 01001101 01010101 01100011 01010110 01001101 01010101 01100011 01010110 01001101 01010101 01100011 01010110 01001101 01010101 01100011 01010110 01001101 01010101 01100011 01010110 01001101 01010101 01100011";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            font-family: monospace;
-            font-size: 14px;
-            line-height: 22px;
-            color: rgba(255, 0, 128, 0.04); /* नियॉन पिंक टच */
-            text-shadow: 0 0 2px rgba(157, 0, 255, 0.15); /* पर्पल ग्लो */
-            word-break: break-all;
-            padding: 10px;
-            z-index: 0;
-            pointer-events: none;
             overflow: hidden;
+            position: relative;
         }
 
-        .container {
-            background: rgba(18, 11, 41, 0.85); /* डार्क पर्पल कार्ड */
-            backdrop-filter: blur(12px);
-            border: 2px solid #ff007f; /* नियॉन पिंक बॉर्डर */
-            border-radius: 16px;
-            padding: 30px;
+        /* 0101 matrix falling background */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 420px;
-            text-align: center;
-            box-shadow: 0 0 35px rgba(255, 0, 127, 0.3), inset 0 0 15px rgba(157, 0, 255, 0.2);
+            height: 100%;
+            z-index: 0;
+        }
+
+        .main-container {
             position: relative;
             z-index: 1;
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
         }
 
-        h2 {
-            font-size: 26px;
-            margin-bottom: 5px;
-            color: #ff007f; /* नियॉन पिंक */
-            text-shadow: 0 0 10px rgba(255, 0, 127, 0.6);
-            text-transform: uppercase;
+        .main-title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #7b99ff;
+            text-shadow: 0 0 25px rgba(123, 153, 255, 0.6);
             letter-spacing: 1px;
+            margin-bottom: 2px;
+            text-transform: uppercase;
         }
 
-        .sub-text {
-            font-size: 13px;
-            color: #b0a8d3;
-            margin-bottom: 25px;
+        .subtitle {
+            font-size: 12px;
+            color: #5d5675;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+            font-weight: 600;
         }
 
-        /* Slider Section (Purple/Pink Theme) */
-        .plan-section {
-            background: rgba(157, 0, 255, 0.05);
-            padding: 18px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 0, 127, 0.2);
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-        }
-
-        .plan-label {
+        /* Select Plan Header */
+        .plan-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
             font-size: 14px;
-            margin-bottom: 12px;
-            display: block;
-            color: #ff007f;
-            font-weight: 500;
-        }
-
-        .slider-container {
-            position: relative;
-            margin-bottom: 12px;
-        }
-
-        .slider {
-            width: 100%;
-            -webkit-appearance: none;
-            height: 6px;
-            border-radius: 5px;
-            background: #251f47;
-            outline: none;
-        }
-
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: #ff007f; /* पिंक थंब */
-            cursor: pointer;
-            box-shadow: 0 0 12px #ff007f;
-            transition: transform 0.1s;
-        }
-
-        .slider::-webkit-slider-thumb:hover {
-            transform: scale(1.1);
-        }
-
-        .days-display {
-            font-size: 18px;
             font-weight: bold;
-            color: #fff;
-            background: linear-gradient(135deg, rgba(255, 0, 127, 0.3), rgba(157, 0, 255, 0.3));
-            padding: 6px 16px;
-            border-radius: 6px;
-            display: inline-block;
-            border: 1px solid rgba(255, 0, 127, 0.4);
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            color: #a4a0ba;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
         }
 
-        /* Generate Key Button */
-        .main-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(90deg, #9d00ff 0%, #ff007f 100%); /* पर्पल टू पिंक ग्रेडिएंट */
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 16px;
+        /* Grid Selection Layout as per Image 1 */
+        .plan-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .plan-box {
+            background: transparent;
+            border: 2px solid transparent;
+            color: #8c86a5;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 13px;
             font-weight: bold;
-            cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .main-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 25px rgba(255, 0, 127, 0.7);
+        /* Selected Active State */
+        .plan-box.active {
+            border-color: #2b61bd;
+            color: #3b9eff;
+            background: rgba(43, 97, 189, 0.05);
+            box-shadow: 0 0 15px rgba(59, 158, 255, 0.3);
         }
 
-        /* MODAL POPUP STYLING */
-        .modal-overlay {
+        /* Generate Button */
+        .generate-btn {
+            width: 100%;
+            padding: 16px;
+            background: #a9bfff;
+            border: none;
+            border-radius: 50px;
+            color: #384260;
+            font-size: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(169, 191, 255, 0.3);
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+        }
+
+        .generate-btn:hover {
+            box-shadow: 0 0 30px rgba(169, 191, 255, 0.6);
+            transform: scale(1.01);
+        }
+
+        /* Verified Key Box Container */
+        .verified-card {
+            border: 2px solid #00f2fe;
+            border-radius: 20px;
+            padding: 22px 16px;
+            background: #070413;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
+            display: none;
+            margin-top: 10px;
+        }
+
+        .verified-title {
+            color: #00f2fe;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .key-inner-wrapper {
+            border: 1px solid #231f38;
+            background: #0d0a1f;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .key-number {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .copy-action-btn {
+            background: #00f2fe;
+            color: #000;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-bar {
+            font-size: 11px;
+            color: #726b8e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-bar span {
+            color: #00f2fe;
+            font-weight: bold;
+        }
+
+        /* MODAL POPUP */
+        .popup-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 3, 15, 0.85);
-            backdrop-filter: blur(8px);
+            background: rgba(3, 1, 8, 0.92);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -168,246 +207,225 @@
             transition: all 0.3s ease;
         }
 
-        .modal-overlay.open {
+        .popup-overlay.open {
             opacity: 1;
             pointer-events: auto;
         }
 
-        .modal-content {
-            background: #120b29;
-            border: 2px solid #ff007f;
-            border-radius: 16px;
+        .popup-box {
+            background: #0a0618;
+            border: 2px solid #7b99ff;
+            border-radius: 24px;
             padding: 25px;
             width: 90%;
-            max-width: 400px;
+            max-width: 380px;
             text-align: center;
-            box-shadow: 0 0 30px rgba(255, 0, 127, 0.4);
-            transform: scale(0.8);
+            box-shadow: 0 0 35px rgba(123, 153, 255, 0.3);
+            transform: scale(0.85);
             transition: all 0.3s ease;
         }
 
-        .modal-overlay.open .modal-content {
+        .popup-overlay.open .popup-box {
             transform: scale(1);
         }
 
-        .modal-title {
-            font-size: 20px;
-            color: #ff007f;
-            margin-bottom: 15px;
+        .popup-header {
+            font-size: 18px;
             font-weight: bold;
-            text-shadow: 0 0 5px rgba(255, 0, 127, 0.5);
+            color: #7b99ff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .task-list {
+        .task-container {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-bottom: 20px;
         }
 
-        .task-btn {
+        .task-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(123, 153, 255, 0.1);
+            border-radius: 12px;
             color: #fff;
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
         }
 
-        .btn-youtube { border-left: 4px solid #ff0000; }
-        .btn-telegram { border-left: 4px solid #0088cc; }
-        .btn-whatsapp { border-left: 4px solid #25d366; }
-
-        .status-dot {
+        .status-indicator {
             width: 10px;
             height: 10px;
             background-color: #ff4d4d;
             border-radius: 50%;
         }
 
-        .status-dot.done {
+        .status-indicator.done {
             background-color: #2ecc71;
             box-shadow: 0 0 8px #2ecc71;
         }
 
-        /* KEY BOX DESIGN */
-        .key-display-box {
-            background: #070412;
-            border: 1px dashed #ff007f;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            display: none;
-            box-shadow: inset 0 0 10px rgba(255, 0, 127, 0.1);
-        }
-
-        .key-title {
-            font-size: 12px;
-            color: #b0a8d3;
-            margin-bottom: 5px;
-        }
-
-        .key-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .generated-key {
-            font-size: 22px;
-            font-weight: bold;
-            color: #2ecc71;
-            letter-spacing: 1.5px;
-            text-shadow: 0 0 5px rgba(46, 204, 113, 0.4);
-        }
-
-        .copy-btn {
-            background: #ff007f;
-            color: #fff;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
-            transition: background 0.2s;
-        }
-
-        .copy-btn:hover {
-            background: #e00070;
-        }
-
-        .close-modal {
-            margin-top: 15px;
-            background: none;
-            border: none;
+        .close-txt {
+            display: inline-block;
+            margin-top: 12px;
             color: #ff4d4d;
-            cursor: pointer;
             font-size: 13px;
+            cursor: pointer;
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>VIP Key Center</h2>
-    <p class="sub-text">दिन सेलेक्ट करें और अपनी प्रीमियम Key जनरेट करें</p>
+<canvas id="matrixCanvas"></canvas>
 
-    <div class="plan-section">
-        <span class="plan-label">वैलिडिटी चुनें:</span>
-        <div class="slider-container">
-            <input type="range" min="1" max="4" value="1" class="slider" id="daysSlider" oninput="updateDays()">
-        </div>
-        <span class="days-display" id="daysValue">3 Days</span>
+<div class="main-container">
+    <div class="main-title">DRIP CLIENT</div>
+    <div class="subtitle">CRACKED VERSION • GW PATHSHALA</div>
+
+    <div class="plan-header">⚙️ SELECT VALIDITY PLAN</div>
+    
+    <div class="plan-grid">
+        <button class="plan-box" onclick="selectPlan(this, '3 DAYS')">3 DAYS PLAN</button>
+        <button class="plan-box active" onclick="selectPlan(this, '7 DAYS')">7 DAYS PLAN</button>
+        <button class="plan-box" onclick="selectPlan(this, '15 DAYS')">15 DAYS PLAN</button>
+        <button class="plan-box" onclick="selectPlan(this, '30 DAYS')">30 DAYS PLAN</button>
     </div>
 
-    <button class="main-btn" onclick="openPopup()">Generate Key</button>
+    <button class="generate-btn" onclick="triggerTasks()">Generate Key</button>
+
+    <div class="verified-card" id="verifiedBox">
+        <div class="verified-title">🔥 GW PATHSHALA OFFICIALLY VERIFIED ✓</div>
+        <div class="key-inner-wrapper">
+            <div class="key-number" id="keyNum">----------</div>
+            <button class="copy-action-btn" onclick="copyKeyText()">📄 COPY VERIFIED KEY</button>
+        </div>
+        <div class="status-bar">PLAN STATUS: <span id="statusText">7 DAYS</span> PREMIUM ACCESS ACTIVE</div>
+    </div>
 </div>
 
-<div class="modal-overlay" id="taskModal">
-    <div class="modal-content">
-        <div class="modal-title" id="modalTitle">Complete Tasks</div>
-        <p style="font-size: 12px; color: #b0a8d3; margin-bottom: 15px;">Key अनलॉक करने के लिए नीचे दिए गए तीनों टास्क पूरे करें</p>
-
-        <div class="task-list">
-            <a href="https://youtu.be/xbDTQqK13TQ?si=WtAFwqsF2gDwBSY6" target="_blank" class="task-btn btn-youtube" onclick="completeTask('yt')">
-                <span>🔴 YouTube Subscribe</span>
-                <span class="status-dot" id="yt-dot"></span>
+<div class="popup-overlay" id="taskPopup">
+    <div class="popup-box">
+        <div class="popup-header">Complete All Tasks</div>
+        
+        <div class="task-container">
+            <a href="https://youtu.be/xbDTQqK13TQ?si=WtAFwqsF2gDwBSY6" target="_blank" class="task-row" onclick="completeTaskStep('yt')">
+                <span>🔴 YouTube Channel Subscribe</span>
+                <span class="status-indicator" id="yt-indicator"></span>
             </a>
-
-            <a href="https://t.me/GwPathshala" target="_blank" class="task-btn btn-telegram" onclick="completeTask('tg')">
+            <a href="https://t.me/GwPathshala" target="_blank" class="task-row" onclick="completeTaskStep('tg')">
                 <span>🔵 Join Telegram Channel</span>
-                <span class="status-dot" id="tg-dot"></span>
+                <span class="status-indicator" id="tg-indicator"></span>
             </a>
-
-            <a href="https://youtu.be/lWQBNSQTAo0?si=PMWoQUa86HRDhGEO" target="_blank" class="task-btn btn-whatsapp" onclick="completeTask('wa')">
+            <a href="https://youtu.be/lWQBNSQTAo0?si=PMWoQUa86HRDhGEO" target="_blank" class="task-row" onclick="completeTaskStep('wa')">
                 <span>🟢 Watch & Share Video</span>
-                <span class="status-dot" id="wa-dot"></span>
+                <span class="status-indicator" id="wa-indicator"></span>
             </a>
         </div>
 
-        <div class="key-display-box" id="keyBox">
-            <div class="key-title">आपकी प्रीमियम Client Key जनरेट हो चुकी है:</div>
-            <div class="key-row">
-                <span class="generated-key" id="keyNum">----------------</span>
-                <button class="copy-btn" onclick="copyKey()">Copy</button>
-            </div>
-        </div>
-
-        <button class="close-modal" onclick="closePopup()">बंद करें (Cancel)</button>
+        <span class="close-txt" onclick="closeTaskWindow()">Cancel</span>
     </div>
 </div>
 
 <script>
-    let selectedPlan = "3 Days";
-    let tasks = { yt: false, tg: false, wa: false };
+    let chosenPlan = "7 DAYS";
+    let taskStatus = { yt: false, tg: false, wa: false };
 
-    // 20 असली न्यूमेरिक कीज़ का पूल
-    const keyPool = [
+    const keysPool = [
         "1137324396", "2489510374", "5931048267", "8104729563", "3571920486",
         "7204918356", "1948263750", "6305814972", "4729105836", "8593021476",
         "3104859267", "9264817350", "5481923076", "2074819365", "6830154927",
         "1493027586", "7392048156", "5820491367", "4910382756", "8204917364"
     ];
 
-    function updateDays() {
-        let val = document.getElementById('daysSlider').value;
-        let daysText = "3 Days";
-        if(val == 2) daysText = "7 Days";
-        if(val == 3) daysText = "15 Days";
-        if(val == 4) daysText = "30 Days";
-        
-        selectedPlan = daysText;
-        document.getElementById('daysValue').innerText = daysText;
+    // 0101 मैट्रिक्स रेन स्क्रिप्ट
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function adjustCanvasSize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    adjustCanvasSize();
+    window.addEventListener('resize', adjustCanvasSize);
+
+    const charList = "01";
+    const sizeOfFont = 14;
+    const totalCols = canvas.width / sizeOfFont;
+    const drops = Array(Math.floor(totalCols)).fill(1);
+
+    function animateMatrix() {
+        ctx.fillStyle = 'rgba(6, 3, 17, 0.1)'; 
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = 'rgba(123, 153, 255, 0.12)'; 
+        ctx.font = sizeOfFont + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+            const char = charList.charAt(Math.floor(Math.random() * charList.length));
+            ctx.fillText(char, i * sizeOfFont, drops[i] * sizeOfFont);
+
+            if (drops[i] * sizeOfFont > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+    setInterval(animateMatrix, 33);
+
+    // प्लान सिलेक्शन फंक्शन
+    function selectPlan(element, planName) {
+        document.querySelectorAll('.plan-box').forEach(box => box.classList.remove('active'));
+        element.classList.add('active');
+        chosenPlan = planName;
     }
 
-    function openPopup() {
-        tasks = { yt: false, tg: false, wa: false };
-        document.getElementById('yt-dot').classList.remove('done');
-        document.getElementById('tg-dot').classList.remove('done');
-        document.getElementById('wa-dot').classList.remove('done');
-        document.getElementById('keyBox').style.display = 'none';
-        
-        document.getElementById('modalTitle').innerText = `${selectedPlan} Key Generation`;
-        document.getElementById('taskModal').classList.add('open');
+    function triggerTasks() {
+        taskStatus = { yt: false, tg: false, wa: false };
+        document.getElementById('yt-indicator').classList.remove('done');
+        document.getElementById('tg-indicator').classList.remove('done');
+        document.getElementById('wa-indicator').classList.remove('done');
+        document.getElementById('verifiedBox').style.display = 'none';
+
+        document.getElementById('taskPopup').classList.add('open');
     }
 
-    function closePopup() {
-        document.getElementById('taskModal').classList.remove('open');
+    function closeTaskWindow() {
+        document.getElementById('taskPopup').classList.remove('open');
     }
 
-    function completeTask(taskName) {
+    function completeTaskStep(type) {
         setTimeout(() => {
-            tasks[taskName] = true;
-            document.getElementById(`${taskName}-dot`).classList.add('done');
-            checkTasks();
+            taskStatus[type] = true;
+            document.getElementById(`${type}-indicator`).classList.add('done');
+            verifyAllSteps();
         }, 1200);
     }
 
-    function checkTasks() {
-        if (tasks.yt && tasks.tg && tasks.wa) {
-            let randomIndex = Math.floor(Math.random() * keyPool.length);
-            let finalKey = keyPool[randomIndex];
-            
-            document.getElementById('keyNum').innerText = finalKey;
-            document.getElementById('keyBox').style.display = 'block';
+    function verifyAllSteps() {
+        if (taskStatus.yt && taskStatus.tg && taskStatus.wa) {
+            setTimeout(() => {
+                closeTaskWindow();
+                let randomIdx = Math.floor(Math.random() * keysPool.length);
+                let finalKey = keysPool[randomIdx];
+
+                document.getElementById('keyNum').innerText = finalKey;
+                document.getElementById('statusText').innerText = chosenPlan;
+                document.getElementById('verifiedBox').style.display = 'block';
+            }, 400);
         }
     }
 
-    function copyKey() {
-        let keyText = document.getElementById('keyNum').innerText;
-        navigator.clipboard.writeText(keyText).then(() => {
-            alert("✅ Key सफलतापूर्वक कॉपी हो गई है: " + keyText);
-        }).catch(err => {
-            alert("कॉपी करने में दिक्कत हुई, कृपया मैन्युअल देख लें।");
+    function copyKeyText() {
+        let text = document.getElementById('keyNum').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("✅ Key Successfully Copied: " + text);
         });
     }
 </script>
