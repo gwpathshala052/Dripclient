@@ -1,14 +1,41 @@
-
-            text-decoration: none;
-            letter-spacing: 1px;
-            margin-bottom: 35px;
-            box-shadow: 0 0 15px rgba(181, 70, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .tg-btn:hover {
-            border-color: #b546ff;
-            box-shadow: 0 0 20px rgba(181, 70, 255, 0.4);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drip Client - GW Pathshala</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #06020f; /* गहरा काला-पर्पल बैकग्राउंड */
             color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 420px;
+            width: 90%;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 42px;
+            font-weight: bold;
+            color: #d161ff;
+            text-shadow: 0 0 20px rgba(209, 97, 255, 0.8), 0 0 40px rgba(209, 97, 255, 0.4);
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+        .tagline {
+            font-size: 14px;
+            color: #aaa;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
         }
         .main-card {
             background: #0d071a;
@@ -18,37 +45,41 @@
             box-shadow: 0 0 35px rgba(181, 70, 255, 0.15);
         }
         .card-header {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             letter-spacing: 1px;
-            margin-bottom: 8px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
-        }
-        .duration-text {
-            font-size: 14px;
             color: #aaa;
+        }
+        /* वैलिडिटी प्लान बटन्स */
+        .plan-zone {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
             margin-bottom: 25px;
         }
-        .duration-text span {
-            color: #3b82f6;
+        .plan-btn {
+            background: #140b26;
+            color: #fff;
+            border: 1px solid #3c165a;
+            padding: 12px;
+            font-size: 14px;
             font-weight: bold;
-        }
-        .slider-container {
-            margin-bottom: 30px;
-            padding: 0 10px;
-        }
-        input[type="range"] {
-            width: 100%;
+            border-radius: 12px;
             cursor: pointer;
-            accent-color: #3b82f6;
-            height: 6px;
-            background: #fff;
-            border-radius: 5px;
-            outline: none;
+            transition: all 0.2s ease;
         }
+        .plan-btn:hover, .plan-btn.active {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+        }
+        /* मुख्य जनरेट बटन */
         .gen-btn {
             background: #be5eff;
             color: #fff;
@@ -62,12 +93,91 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow: 0 0 25px rgba(190, 94, 255, 0.6);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.2s;
         }
         .gen-btn:hover {
-            transform: scale(1.02);
             box-shadow: 0 0 35px rgba(190, 94, 255, 0.8);
         }
+
+        /* 🚨 टास्क पॉपअप (Modal Background) */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(4, 1, 10, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background: #0d071a;
+            border: 2px solid #be5eff;
+            box-shadow: 0 0 30px rgba(190, 94, 255, 0.4);
+            width: 90%;
+            max-width: 380px;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .popup-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #be5eff;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .task-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #140b26;
+            color: #fff;
+            border: 1px solid #3c165a;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            transition: all 0.2s;
+        }
+        .task-btn:hover {
+            border-color: #be5eff;
+        }
+        .task-btn.done {
+            border-color: #00ffcc;
+            background: rgba(0, 255, 204, 0.05);
+            color: #00ffcc;
+            cursor: not-allowed;
+        }
+        /* पॉपअप का क्लेम बटन */
+        .claim-btn {
+            background: #333;
+            color: #666;
+            border: none;
+            padding: 12px 0;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 25px;
+            width: 100%;
+            cursor: not-allowed;
+            text-transform: uppercase;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        .claim-btn.ready {
+            background: #00ffcc;
+            color: #000;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+        }
+
+        /* लोडिंग एनीमेशन */
         .loader {
             display: none;
             margin-top: 20px;
@@ -76,46 +186,60 @@
             font-weight: bold;
             letter-spacing: 1px;
         }
+
+        /* 💎 वीआईपी और कड़क की बॉक्स (टास्क के बाद दिखेगा) */
         .key-box {
             display: none;
-            margin-top: 25px;
-            background: #06020f;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #be5eff;
-            box-shadow: 0 0 15px rgba(190, 94, 255, 0.2);
+            margin-top: 30px;
+            background: #04010a;
+            padding: 22px;
+            border-radius: 18px;
+            border: 2px solid #00ffcc;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.4);
+        }
+        .key-branding {
+            font-size: 13px;
+            font-weight: bold;
+            color: #00ffcc;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
         }
         .key-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #120924;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            background: #0d071a;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            margin-bottom: 15px;
         }
         .key-text {
-            font-size: 18px;
-            font-family: monospace;
+            font-size: 26px;
+            font-family: 'Courier New', Courier, monospace;
             color: #fff;
             font-weight: bold;
-            letter-spacing: 1px;
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 12px;
         }
         .copy-btn {
-            background: #be5eff;
-            color: white;
+            background: linear-gradient(45deg, #00ffcc, #0099ff);
+            color: #000;
             border: none;
-            padding: 6px 12px;
+            padding: 8px 20px;
             cursor: pointer;
-            border-radius: 4px;
-            font-size: 12px;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: bold;
+            text-transform: uppercase;
         }
         .status-text {
             font-size: 12px;
-            color: #be5eff;
-            font-weight: bold;
+            color: #aaa;
             letter-spacing: 1px;
+        }
+        .status-text span {
+            color: #00ffcc;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -123,75 +247,150 @@
 
 <div class="container">
     <h1>Drip Client</h1>
-    <div class="tagline">Cracked Version</div>
-    <div class="welcome-text">Welcome to GW Pathshala</div>
-    
-    <a href="https://t.me/GwPathshala" target="_blank" class="tg-btn">JOIN TELEGRAM</a>
+    <div class="tagline">Cracked Version - GW Pathshala</div>
     
     <div class="main-card">
         <div class="card-header">
-            <span>🔑</span> GENERATE KEY
+            <span>⚙️</span> SELECT VALIDITY PLAN
         </div>
         
-        <div class="duration-text">
-            Duration: <span id="daysValue">7 days</span>
+        <div class="plan-zone">
+            <button class="plan-btn active" onclick="selectPlan(3, this)">3 DAYS PLAN</button>
+            <button class="plan-btn" onclick="selectPlan(7, this)">7 DAYS PLAN</button>
+            <button class="plan-btn" onclick="selectPlan(15, this)">15 DAYS PLAN</button>
+            <button class="plan-btn" onclick="selectPlan(30, this)">30 DAYS PLAN</button>
         </div>
         
-        <div class="slider-container">
-            <input type="range" id="daysSlider" min="1" max="30" value="7" oninput="updateDays(this.value)">
-        </div>
+        <button class="gen-btn" id="mainGenBtn" onclick="openPopup()">Generate Key</button>
         
-        <button class="gen-btn" id="actionBtn" onclick="processKey()">Generate Key</button>
-        
-        <div class="loader" id="loader">GENERATING KEY... PLEASE WAIT</div>
+        <div class="loader" id="loader">GENERATING SECURE KEY... PLEASE WAIT</div>
         
         <div class="key-box" id="keyBox">
+            <div class="key-branding">🔥 GW PATHSHALA OFFICIALLY VERIFIED ✔️</div>
             <div class="key-wrapper">
                 <span class="key-text" id="keyValue">LOADING...</span>
-                <button class="copy-btn" onclick="copyKey()">COPY</button>
+                <button class="copy-btn" onclick="copyKey()">📋 Copy Verified Key</button>
             </div>
-            <div class="status-text" id="statusText">* PREMIUM ACCESS GRANTED FOR 7 DAYS *</div>
+            <div class="status-text">PLAN STATUS: <span id="statusDays">3 DAYS</span> PREMIUM ACCESS ACTIVE</div>
         </div>
     </div>
 </div>
 
+<div class="popup-overlay" id="taskPopup">
+    <div class="popup-content">
+        <div class="popup-title">⚠️ COMPLETE TASKS TO UNLOCK KEY</div>
+        
+        <button class="task-btn" id="ytTask" onclick="completeTask('yt', 'https://youtube.com/@gwpathshala052')">
+            <span>🔴 Subscribe GW Pathshala</span>
+            <span id="ytStatus">❌ Locked</span>
+        </button>
+        
+        <button class="task-btn" id="tgTask" onclick="completeTask('tg', 'https://t.me/GwPathshala')">
+            <span>🔵 Join Telegram Channel</span>
+            <span id="tgStatus">❌ Locked</span>
+        </button>
+
+        <button class="task-btn" id="waTask" onclick="shareVideoOnWhatsApp()">
+            <span>🚀 Share Video on WhatsApp</span>
+            <span id="waStatus">❌ Locked</span>
+        </button>
+        
+        <button class="claim-btn" id="claimBtn" onclick="claimKey()" disabled>Complete All Tasks</button>
+    </div>
+</div>
+
 <script>
-    function updateDays(val) {
-        document.getElementById("daysValue").innerText = val + " days";
+    var currentSelectedDays = 3;
+    var ytDone = false;
+    var tgDone = false;
+    var waDone = false;
+
+    function selectPlan(days, element) {
+        currentSelectedDays = days;
+        var buttons = document.getElementsByClassName('plan-btn');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('active');
+        }
+        element.classList.add('active');
     }
 
-    function processKey() {
+    function openPopup() {
+        document.getElementById("keyBox").style.display = "none";
+        document.getElementById("taskPopup").style.display = "flex";
+    }
+
+    function completeTask(type, link) {
+        window.open(link, '_blank');
+        setTimeout(function() {
+            if(type === 'yt') {
+                ytDone = true;
+                document.getElementById("ytTask").classList.add("done");
+                document.getElementById("ytStatus").innerText = "✔ Done";
+            } else if(type === 'tg') {
+                tgDone = true;
+                document.getElementById("tgTask").classList.add("done");
+                document.getElementById("tgStatus").innerText = "✔ Done";
+            }
+            checkAllTasks();
+        }, 1000);
+    }
+
+    function shareVideoOnWhatsApp() {
+        var myVideoLink = "https://youtube.com/@gwpathshala052"; 
+        var shareMessage = "Bhai jaldi ye premium video dekho, mast trick batayi hai free fire ki: " + myVideoLink;
+        var whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareMessage);
+        window.open(whatsappUrl, '_blank');
+        
+        setTimeout(function() {
+            waDone = true;
+            document.getElementById("waTask").classList.add("done");
+            document.getElementById("waStatus").innerText = "✔ Done";
+            checkAllTasks();
+        }, 1000);
+    }
+
+    function checkAllTasks() {
+        if(ytDone && tgDone && waDone) {
+            var claimBtn = document.getElementById("claimBtn");
+            claimBtn.disabled = false;
+            claimBtn.classList.add("ready");
+            claimBtn.innerText = "Claim Your Key ✔";
+        }
+    }
+
+    function claimKey() {
+        document.getElementById("taskPopup").style.display = "none";
         var loader = document.getElementById("loader");
         var keyBox = document.getElementById("keyBox");
         var keyValue = document.getElementById("keyValue");
-        var statusText = document.getElementById("statusText");
+        var statusDays = document.getElementById("statusDays");
         
-        keyBox.style.display = "none";
         loader.style.display = "block";
         
         setTimeout(function() {
             loader.style.display = "none";
-            
-            // 🤖 10 digit automatic key generator
             var randomKey = "";
             randomKey += Math.floor(Math.random() * 9) + 1; 
             for (var i = 0; i < 9; i++) {
                 randomKey += Math.floor(Math.random() * 10);
             }
             
-            var selectedDays = document.getElementById("daysSlider").value;
-            
             keyValue.innerText = randomKey;
-            statusText.innerText = "* PREMIUM ACCESS GRANTED FOR " + selectedDays + " DAYS *";
-            
+            statusDays.innerText = currentSelectedDays + " DAYS";
             keyBox.style.display = "block";
+            
+            ytDone = false; tgDone = false; waDone = false;
+            document.getElementById("ytTask").classList.remove("done"); document.getElementById("ytStatus").innerText = "❌ Locked";
+            document.getElementById("tgTask").classList.remove("done"); document.getElementById("tgStatus").innerText = "❌ Locked";
+            document.getElementById("waTask").classList.remove("done"); document.getElementById("waStatus").innerText = "❌ Locked";
+            var cBtn = document.getElementById("claimBtn"); cBtn.disabled = true; cBtn.classList.remove("ready"); cBtn.innerText = "Complete All Tasks";
         }, 1200);
     }
 
     function copyKey() {
         var keyText = document.getElementById("keyValue").innerText;
         navigator.clipboard.writeText(keyText);
-        alert("Key Copied: " + keyText);
+        alert("GW Pathshala Key Copied: " + keyText);
     }
 </script>
 
