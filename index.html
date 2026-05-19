@@ -1,396 +1,414 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drip Client - GW Pathshala</title>
+    <title>VIP Client Key Generator</title>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #06020f; /* गहरा काला-पर्पल बैकग्राउंड */
+        }
+
+        body {
+            /* पर्पल और डार्क बैकग्राउंड थीम */
+            background-color: #0b071e;
             color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            text-align: center;
-        }
-        .container {
-            max-width: 420px;
-            width: 90%;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
-        h1 {
-            font-size: 42px;
-            font-weight: bold;
-            color: #d161ff;
-            text-shadow: 0 0 20px rgba(209, 97, 255, 0.8), 0 0 40px rgba(209, 97, 255, 0.4);
-            margin: 0 0 5px 0;
-            text-transform: uppercase;
-        }
-        .tagline {
+
+        /* 010101 कोडिंग/मैट्रिक्स बैकग्राउंड पैटर्न - पर्पल और पिंक ओपेसिटी के साथ */
+        body::before {
+            content: "01010110 01001101 01010101 01100011 01010110 01001101 01010101 01100011 01010110 01001101 01010101 01100011 01010110 01001101 01010101 01100011 01010110 01001101 01010101 01100011 01010110 01001101 01010101 01100011 01010110 01001101 01010101 01100011";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            font-family: monospace;
             font-size: 14px;
-            color: #aaa;
-            letter-spacing: 2px;
+            line-height: 22px;
+            color: rgba(255, 0, 128, 0.04); /* नियॉन पिंक टच */
+            text-shadow: 0 0 2px rgba(157, 0, 255, 0.15); /* पर्पल ग्लो */
+            word-break: break-all;
+            padding: 10px;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(18, 11, 41, 0.85); /* डार्क पर्पल कार्ड */
+            backdrop-filter: blur(12px);
+            border: 2px solid #ff007f; /* नियॉन पिंक बॉर्डर */
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 0 35px rgba(255, 0, 127, 0.3), inset 0 0 15px rgba(157, 0, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            font-size: 26px;
+            margin-bottom: 5px;
+            color: #ff007f; /* नियॉन पिंक */
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.6);
             text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-text {
+            font-size: 13px;
+            color: #b0a8d3;
             margin-bottom: 25px;
         }
-        .main-card {
-            background: #0d071a;
-            border-radius: 24px;
-            padding: 30px 25px;
-            border: 1px solid #1a0f30;
-            box-shadow: 0 0 35px rgba(181, 70, 255, 0.15);
+
+        /* Slider Section (Purple/Pink Theme) */
+        .plan-section {
+            background: rgba(157, 0, 255, 0.05);
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 0, 127, 0.2);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
         }
-        .card-header {
+
+        .plan-label {
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: block;
+            color: #ff007f;
+            font-weight: 500;
+        }
+
+        .slider-container {
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .slider {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 5px;
+            background: #251f47;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #ff007f; /* पिंक थंब */
+            cursor: pointer;
+            box-shadow: 0 0 12px #ff007f;
+            transition: transform 0.1s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .days-display {
             font-size: 18px;
             font-weight: bold;
+            color: #fff;
+            background: linear-gradient(135deg, rgba(255, 0, 127, 0.3), rgba(157, 0, 255, 0.3));
+            padding: 6px 16px;
+            border-radius: 6px;
+            display: inline-block;
+            border: 1px solid rgba(255, 0, 127, 0.4);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Generate Key Button */
+        .main-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(90deg, #9d00ff 0%, #ff007f 100%); /* पर्पल टू पिंक ग्रेडिएंट */
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
             letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .main-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.7);
+        }
+
+        /* MODAL POPUP STYLING */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 3, 15, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #120b29;
+            border: 2px solid #ff007f;
+            border-radius: 16px;
+            padding: 25px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.4);
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-size: 20px;
+            color: #ff007f;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255, 0, 127, 0.5);
+        }
+
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
             margin-bottom: 20px;
+        }
+
+        .task-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-youtube { border-left: 4px solid #ff0000; }
+        .btn-telegram { border-left: 4px solid #0088cc; }
+        .btn-whatsapp { border-left: 4px solid #25d366; }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #ff4d4d;
+            border-radius: 50%;
+        }
+
+        .status-dot.done {
+            background-color: #2ecc71;
+            box-shadow: 0 0 8px #2ecc71;
+        }
+
+        /* KEY BOX DESIGN */
+        .key-display-box {
+            background: #070412;
+            border: 1px dashed #ff007f;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+            box-shadow: inset 0 0 10px rgba(255, 0, 127, 0.1);
+        }
+
+        .key-title {
+            font-size: 12px;
+            color: #b0a8d3;
+            margin-bottom: 5px;
+        }
+
+        .key-row {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
-            color: #aaa;
-        }
-        /* वैलिडिटी प्लान बटन्स */
-        .plan-zone {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-        .plan-btn {
-            background: #140b26;
-            color: #fff;
-            border: 1px solid #3c165a;
-            padding: 12px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .plan-btn:hover, .plan-btn.active {
-            border-color: #3b82f6;
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
-        }
-        /* मुख्य जनरेट बटन */
-        .gen-btn {
-            background: #be5eff;
-            color: #fff;
-            border: none;
-            padding: 15px 0;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            width: 100%;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 25px rgba(190, 94, 255, 0.6);
-            transition: all 0.2s;
-        }
-        .gen-btn:hover {
-            box-shadow: 0 0 35px rgba(190, 94, 255, 0.8);
         }
 
-        /* 🚨 टास्क पॉपअप (Modal Background) */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(4, 1, 10, 0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        .popup-content {
-            background: #0d071a;
-            border: 2px solid #be5eff;
-            box-shadow: 0 0 30px rgba(190, 94, 255, 0.4);
-            width: 90%;
-            max-width: 380px;
-            padding: 25px;
-            border-radius: 20px;
-            text-align: center;
-        }
-        .popup-title {
-            font-size: 16px;
+        .generated-key {
+            font-size: 22px;
             font-weight: bold;
-            color: #be5eff;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-        .task-btn {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #140b26;
-            color: #fff;
-            border: 1px solid #3c165a;
-            padding: 12px 20px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 12px;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 12px;
-            box-sizing: border-box;
-            transition: all 0.2s;
-        }
-        .task-btn:hover {
-            border-color: #be5eff;
-        }
-        .task-btn.done {
-            border-color: #00ffcc;
-            background: rgba(0, 255, 204, 0.05);
-            color: #00ffcc;
-            cursor: not-allowed;
-        }
-        /* पॉपअप का क्लेम बटन */
-        .claim-btn {
-            background: #333;
-            color: #666;
-            border: none;
-            padding: 12px 0;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 25px;
-            width: 100%;
-            cursor: not-allowed;
-            text-transform: uppercase;
-            margin-top: 10px;
-            transition: all 0.3s;
-        }
-        .claim-btn.ready {
-            background: #00ffcc;
-            color: #000;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+            color: #2ecc71;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 5px rgba(46, 204, 113, 0.4);
         }
 
-        /* लोडिंग एनीमेशन */
-        .loader {
-            display: none;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #be5eff;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        /* 💎 वीआईपी और कड़क की बॉक्स (टास्क के बाद दिखेगा) */
-        .key-box {
-            display: none;
-            margin-top: 30px;
-            background: #04010a;
-            padding: 22px;
-            border-radius: 18px;
-            border: 2px solid #00ffcc;
-            box-shadow: 0 0 30px rgba(0, 255, 204, 0.4);
-        }
-        .key-branding {
-            font-size: 13px;
-            font-weight: bold;
-            color: #00ffcc;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-        .key-wrapper {
-            background: #0d071a;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 255, 204, 0.3);
-            margin-bottom: 15px;
-        }
-        .key-text {
-            font-size: 26px;
-            font-family: 'Courier New', Courier, monospace;
-            color: #fff;
-            font-weight: bold;
-            letter-spacing: 3px;
-            display: block;
-            margin-bottom: 12px;
-        }
         .copy-btn {
-            background: linear-gradient(45deg, #00ffcc, #0099ff);
-            color: #000;
+            background: #ff007f;
+            color: #fff;
             border: none;
-            padding: 8px 20px;
-            cursor: pointer;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .status-text {
+            padding: 6px 14px;
+            border-radius: 4px;
             font-size: 12px;
-            color: #aaa;
-            letter-spacing: 1px;
-        }
-        .status-text span {
-            color: #00ffcc;
             font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #e00070;
+        }
+
+        .close-modal {
+            margin-top: 15px;
+            background: none;
+            border: none;
+            color: #ff4d4d;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Drip Client</h1>
-    <div class="tagline">Cracked Version - GW Pathshala</div>
-    
-    <div class="main-card">
-        <div class="card-header">
-            <span>⚙️</span> SELECT VALIDITY PLAN
+    <h2>VIP Key Center</h2>
+    <p class="sub-text">दिन सेलेक्ट करें और अपनी प्रीमियम Key जनरेट करें</p>
+
+    <div class="plan-section">
+        <span class="plan-label">वैलिडिटी चुनें:</span>
+        <div class="slider-container">
+            <input type="range" min="1" max="4" value="1" class="slider" id="daysSlider" oninput="updateDays()">
         </div>
-        
-        <div class="plan-zone">
-            <button class="plan-btn active" onclick="selectPlan(3, this)">3 DAYS PLAN</button>
-            <button class="plan-btn" onclick="selectPlan(7, this)">7 DAYS PLAN</button>
-            <button class="plan-btn" onclick="selectPlan(15, this)">15 DAYS PLAN</button>
-            <button class="plan-btn" onclick="selectPlan(30, this)">30 DAYS PLAN</button>
-        </div>
-        
-        <button class="gen-btn" id="mainGenBtn" onclick="openPopup()">Generate Key</button>
-        
-        <div class="loader" id="loader">GENERATING SECURE KEY... PLEASE WAIT</div>
-        
-        <div class="key-box" id="keyBox">
-            <div class="key-branding">🔥 GW PATHSHALA OFFICIALLY VERIFIED ✔️</div>
-            <div class="key-wrapper">
-                <span class="key-text" id="keyValue">LOADING...</span>
-                <button class="copy-btn" onclick="copyKey()">📋 Copy Verified Key</button>
-            </div>
-            <div class="status-text">PLAN STATUS: <span id="statusDays">3 DAYS</span> PREMIUM ACCESS ACTIVE</div>
-        </div>
+        <span class="days-display" id="daysValue">3 Days</span>
     </div>
+
+    <button class="main-btn" onclick="openPopup()">Generate Key</button>
 </div>
 
-<div class="popup-overlay" id="taskPopup">
-    <div class="popup-content">
-        <div class="popup-title">⚠️ COMPLETE TASKS TO UNLOCK KEY</div>
-        
-        <button class="task-btn" id="ytTask" onclick="completeTask('yt', 'https://youtube.com/@gwpathshala052')">
-            <span>🔴 Subscribe GW Pathshala</span>
-            <span id="ytStatus">❌ Locked</span>
-        </button>
-        
-        <button class="task-btn" id="tgTask" onclick="completeTask('tg', 'https://t.me/GwPathshala')">
-            <span>🔵 Join Telegram Channel</span>
-            <span id="tgStatus">❌ Locked</span>
-        </button>
+<div class="modal-overlay" id="taskModal">
+    <div class="modal-content">
+        <div class="modal-title" id="modalTitle">Complete Tasks</div>
+        <p style="font-size: 12px; color: #b0a8d3; margin-bottom: 15px;">Key अनलॉक करने के लिए नीचे दिए गए तीनों टास्क पूरे करें</p>
 
-        <button class="task-btn" id="waTask" onclick="shareVideoOnWhatsApp()">
-            <span>🚀 Share Video on WhatsApp</span>
-            <span id="waStatus">❌ Locked</span>
-        </button>
-        
-        <button class="claim-btn" id="claimBtn" onclick="claimKey()" disabled>Complete All Tasks</button>
+        <div class="task-list">
+            <a href="https://youtube.com/@gwpathshalaextra" target="_blank" class="task-btn btn-youtube" onclick="completeTask('yt')">
+                <span>🔴 YouTube Subscribe</span>
+                <span class="status-dot" id="yt-dot"></span>
+            </a>
+
+            <a href="https://t.me/GwPathshala" target="_blank" class="task-btn btn-telegram" onclick="completeTask('tg')">
+                <span>🔵 Join Telegram Channel</span>
+                <span class="status-dot" id="tg-dot"></span>
+            </a>
+
+            <a href="https://youtu.be/lWQBNSQTAo0?si=PMWoQUa86HRDhGEO" target="_blank" class="task-btn btn-whatsapp" onclick="completeTask('wa')">
+                <span>🟢 Watch & Share Video</span>
+                <span class="status-dot" id="wa-dot"></span>
+            </a>
+        </div>
+
+        <div class="key-display-box" id="keyBox">
+            <div class="key-title">आपकी प्रीमियम Client Key जनरेट हो चुकी है:</div>
+            <div class="key-row">
+                <span class="generated-key" id="keyNum">----------------</span>
+                <button class="copy-btn" onclick="copyKey()">Copy</button>
+            </div>
+        </div>
+
+        <button class="close-modal" onclick="closePopup()">बंद करें (Cancel)</button>
     </div>
 </div>
 
 <script>
-    var currentSelectedDays = 3;
-    var ytDone = false;
-    var tgDone = false;
-    var waDone = false;
+    let selectedPlan = "3 Days";
+    let tasks = { yt: false, tg: false, wa: false };
 
-    function selectPlan(days, element) {
-        currentSelectedDays = days;
-        var buttons = document.getElementsByClassName('plan-btn');
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove('active');
-        }
-        element.classList.add('active');
+    // 20 असली न्यूमेरिक कीज़ का पूल
+    const keyPool = [
+        "1137324396", "2489510374", "5931048267", "8104729563", "3571920486",
+        "7204918356", "1948263750", "6305814972", "4729105836", "8593021476",
+        "3104859267", "9264817350", "5481923076", "2074819365", "6830154927",
+        "1493027586", "7392048156", "5820491367", "4910382756", "8204917364"
+    ];
+
+    function updateDays() {
+        let val = document.getElementById('daysSlider').value;
+        let daysText = "3 Days";
+        if(val == 2) daysText = "7 Days";
+        if(val == 3) daysText = "15 Days";
+        if(val == 4) daysText = "30 Days";
+        
+        selectedPlan = daysText;
+        document.getElementById('daysValue').innerText = daysText;
     }
 
     function openPopup() {
-        document.getElementById("keyBox").style.display = "none";
-        document.getElementById("taskPopup").style.display = "flex";
-    }
-
-    function completeTask(type, link) {
-        window.open(link, '_blank');
-        setTimeout(function() {
-            if(type === 'yt') {
-                ytDone = true;
-                document.getElementById("ytTask").classList.add("done");
-                document.getElementById("ytStatus").innerText = "✔ Done";
-            } else if(type === 'tg') {
-                tgDone = true;
-                document.getElementById("tgTask").classList.add("done");
-                document.getElementById("tgStatus").innerText = "✔ Done";
-            }
-            checkAllTasks();
-        }, 1000);
-    }
-
-    function shareVideoOnWhatsApp() {
-        var myVideoLink = "https://youtube.com/@gwpathshala052"; 
-        var shareMessage = "Bhai jaldi ye premium video dekho, mast trick batayi hai free fire ki: " + myVideoLink;
-        var whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareMessage);
-        window.open(whatsappUrl, '_blank');
+        tasks = { yt: false, tg: false, wa: false };
+        document.getElementById('yt-dot').classList.remove('done');
+        document.getElementById('tg-dot').classList.remove('done');
+        document.getElementById('wa-dot').classList.remove('done');
+        document.getElementById('keyBox').style.display = 'none';
         
-        setTimeout(function() {
-            waDone = true;
-            document.getElementById("waTask").classList.add("done");
-            document.getElementById("waStatus").innerText = "✔ Done";
-            checkAllTasks();
-        }, 1000);
+        document.getElementById('modalTitle').innerText = `${selectedPlan} Key Generation`;
+        document.getElementById('taskModal').classList.add('open');
     }
 
-    function checkAllTasks() {
-        if(ytDone && tgDone && waDone) {
-            var claimBtn = document.getElementById("claimBtn");
-            claimBtn.disabled = false;
-            claimBtn.classList.add("ready");
-            claimBtn.innerText = "Claim Your Key ✔";
-        }
+    function closePopup() {
+        document.getElementById('taskModal').classList.remove('open');
     }
 
-    function claimKey() {
-        document.getElementById("taskPopup").style.display = "none";
-        var loader = document.getElementById("loader");
-        var keyBox = document.getElementById("keyBox");
-        var keyValue = document.getElementById("keyValue");
-        var statusDays = document.getElementById("statusDays");
-        
-        loader.style.display = "block";
-        
-        setTimeout(function() {
-            loader.style.display = "none";
-            var randomKey = "";
-            randomKey += Math.floor(Math.random() * 9) + 1; 
-            for (var i = 0; i < 9; i++) {
-                randomKey += Math.floor(Math.random() * 10);
-            }
-            
-            keyValue.innerText = randomKey;
-            statusDays.innerText = currentSelectedDays + " DAYS";
-            keyBox.style.display = "block";
-            
-            ytDone = false; tgDone = false; waDone = false;
-            document.getElementById("ytTask").classList.remove("done"); document.getElementById("ytStatus").innerText = "❌ Locked";
-            document.getElementById("tgTask").classList.remove("done"); document.getElementById("tgStatus").innerText = "❌ Locked";
-            document.getElementById("waTask").classList.remove("done"); document.getElementById("waStatus").innerText = "❌ Locked";
-            var cBtn = document.getElementById("claimBtn"); cBtn.disabled = true; cBtn.classList.remove("ready"); cBtn.innerText = "Complete All Tasks";
+    function completeTask(taskName) {
+        setTimeout(() => {
+            tasks[taskName] = true;
+            document.getElementById(`${taskName}-dot`).classList.add('done');
+            checkTasks();
         }, 1200);
     }
 
+    function checkTasks() {
+        if (tasks.yt && tasks.tg && tasks.wa) {
+            let randomIndex = Math.floor(Math.random() * keyPool.length);
+            let finalKey = keyPool[randomIndex];
+            
+            document.getElementById('keyNum').innerText = finalKey;
+            document.getElementById('keyBox').style.display = 'block';
+        }
+    }
+
     function copyKey() {
-        var keyText = document.getElementById("keyValue").innerText;
-        navigator.clipboard.writeText(keyText);
-        alert("GW Pathshala Key Copied: " + keyText);
+        let keyText = document.getElementById('keyNum').innerText;
+        navigator.clipboard.writeText(keyText).then(() => {
+            alert("✅ Key सफलतापूर्वक कॉपी हो गई है: " + keyText);
+        }).catch(err => {
+            alert("कॉपी करने में दिक्कत हुई, कृपया मैन्युअल देख लें।");
+        });
     }
 </script>
 
