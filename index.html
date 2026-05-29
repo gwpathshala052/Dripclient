@@ -174,11 +174,40 @@
             cursor: pointer;
             box-shadow: 0 0 35px rgba(190, 110, 255, 0.7);
             transition: all 0.3s ease;
+            margin-bottom: 18px; /* Download button ke liye gap */
         }
 
         .generate-btn:hover {
             box-shadow: 0 0 45px rgba(190, 110, 255, 0.9);
             transform: scale(1.01);
+        }
+
+        /* ———————————————————————————————————————————————
+           DOWNLOAD BUTTON STYLE (MATCHED TO YOUR THEME)
+           ——————————————————————————————————————————————— */
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            border: 2px solid #be6eff;
+            border-radius: 50px;
+            color: #be6eff;
+            font-size: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(190, 110, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: rgba(190, 110, 255, 0.1);
+            box-shadow: 0 0 35px rgba(190, 110, 255, 0.6);
+            color: #ffffff;
+            border-color: #ffffff;
         }
 
         /* वेरीफाइड की बॉक्स (सफ़ेद/स्यान बॉर्डर इफ़ेक्ट) */
@@ -348,7 +377,11 @@
             <input type="range" min="1" max="4" value="2" class="slider" id="planSlider" oninput="slidePlan()">
         </div>
 
+        <!-- Purana Generate Button -->
         <button class="generate-btn" onclick="triggerTasks()">Generate Key</button>
+
+        <!-- Naya Added Download Drip Client APK Button -->
+        <a href="https://earnlinks.in/Drip-client-Apk" target="_blank" class="download-btn">📥 Download Drip Client APK</a>
 
         <div class="verified-card" id="verifiedBox">
             <div class="verified-title">🔥 GW PATHSHALA OFFICIALLY VERIFIED ✓</div>
@@ -366,16 +399,19 @@
         <div class="popup-header">Complete All Tasks</div>
         
         <div class="task-container">
+            <!-- Task 1: Untouched -->
             <a href="https://youtu.be/xbDTQqK13TQ?si=WtAFwqsF2gDwBSY6" target="_blank" class="task-row" onclick="completeTaskStep('yt')">
                 <span>🔴 YouTube Channel Subscribe</span>
                 <span class="status-indicator" id="yt-indicator"></span>
             </a>
+            <!-- Task 2: Untouched -->
             <a href="https://t.me/GwPathshala" target="_blank" class="task-row" onclick="completeTaskStep('tg')">
                 <span>🔵 Join Telegram Channel</span>
                 <span class="status-indicator" id="tg-indicator"></span>
             </a>
-            <a href="https://youtu.be/lWQBNSQTAo0?si=PMWoQUa86HRDhGEO" target="_blank" class="task-row" onclick="completeTaskStep('wa')">
-                <span>🟢 Watch & Share Video</span>
+            <!-- Task 3: Name and YouTube Link Updated Perfectly -->
+            <a href="https://youtu.be/NnCV9VJoe_s?si=O3fQmOwvFgPncBoR" target="_blank" class="task-row" onclick="completeTaskStep('wa')">
+                <span>🟢 Watch Full & Share Video</span>
                 <span class="status-indicator" id="wa-indicator"></span>
             </a>
         </div>
@@ -415,7 +451,7 @@
         ctx.fillStyle = 'rgba(6, 2, 15, 0.12)'; 
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = 'rgba(190, 110, 255, 0.12)'; // हल्का नियॉन पर्पल 01 इफ़ेक्ट
+        ctx.fillStyle = 'rgba(190, 110, 255, 0.12)'; 
         ctx.font = sizeOfFont + 'px monospace';
 
         for (let i = 0; i < drops.length; i++) {
